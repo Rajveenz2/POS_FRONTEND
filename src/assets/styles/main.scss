@@ -1,0 +1,276 @@
+@import "./variables";
+
+.logo {
+  height: 45px;
+  width: auto;
+  background-color: white;
+}
+
+.theme--light.v-messages {
+  color: #2ca8a0 !important;
+  font-weight: bolder !important;
+  margin-left: 1% !important;
+}
+
+.theme--light.v-stepper .v-stepper__label {
+  color: rgb(255, 255, 255) !important;
+}
+
+.theme--light.v-label {
+  font-family: "Franklin Gothic Medium", sans-serif !important;
+  font-size: 1rem !important;
+  color: rgb(0, 0, 0) !important;
+}
+
+.theme--light.v-stepper
+  .v-stepper__step:not(.v-stepper__step--active):not(.v-stepper__step--complete):not(.v-stepper__step--error)
+  .v-stepper__step__step {
+  background: white !important;
+  height: inherit !important;
+  color: #0075a7 !important;
+  font-weight: bold;
+}
+
+.v-application {
+  font-family: "Franklin Gothic Medium", sans-serif !important;
+  font-size: 1.1rem !important;
+  line-height: 1.5 !important;
+  color: rgb(0, 0, 0) !important;
+}
+
+.v-application .blue {
+  background-color: #2aaba0 !important;
+  border-color: #0075a7 !important;
+}
+
+.theme--light.v-stepper .v-stepper__step__step {
+  color: #0075a7;
+  background-color: rgb(255, 255, 255) !important;
+  font-weight: bold;
+}
+
+.v-data-table > .v-data-table__wrapper > table > tbody > tr > th,
+.v-data-table > .v-data-table__wrapper > table > thead > tr > th,
+.v-data-table > .v-data-table__wrapper > table > tfoot > tr > th {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+  font-size: 0.85rem !important;
+  height: 48px !important;
+}
+
+.v-data-table > .v-data-table__wrapper > table > tbody > tr > td,
+.v-data-table > .v-data-table__wrapper > table > thead > tr > td,
+.v-data-table > .v-data-table__wrapper > table > tfoot > tr > td {
+  font-size: 0.95rem !important;
+  height: 48px !important;
+}
+
+.theme--light.v-data-table > .v-data-table__wrapper > table > thead > tr > th {
+  color: rgb(255, 255, 255) !important;
+}
+
+.v-toolbar__title {
+  font-family: "Lucida Bright", serif !important;
+  font-size: 2rem;
+  line-height: 1.75;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #2ca8a0;
+  font-weight: bolder;
+}
+
+.v-input__slot {
+  align-items: center !important;
+  color: inherit !important;
+  display: flex !important;
+  margin-bottom: 8px !important;
+  min-height: inherit !important;
+  position: relative !important;
+  transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1) !important;
+  width: 93% !important;
+  margin-left: 1% !important;
+}
+
+.theme--light.v-text-field--solo > .v-input__control > .v-input__slot {
+  background: #fff0 !important;
+}
+
+.v-chip.v-size--small {
+  border-radius: 12px !important;
+  font-size: 16px !important;
+  height: 24px !important;
+}
+
+.theme--light.v-footer {
+  background-color: transparent;
+  color: rgba(0, 0, 0, 0.87) !important;
+}
+
+.v-application .success--text {
+  color: #2ca8a0 !important;
+  caret-color: #2ca8a0 !important;
+}
+
+.v-application .mb-6 {
+  margin-bottom: 2px !important;
+}
+
+$border: 1px solid #2ca8a0;
+.quantity-toggle {
+  display: flex !important;
+  margin-top: 1% !important;
+  margin-bottom: 1% !important;
+  margin-right: auto !important;
+  margin-left: auto !important;
+
+  input {
+    border: 0 !important;
+    border-top: $border !important;
+    border-bottom: $border !important;
+    width: 2.8rem !important;
+    text-align: center !important;
+    color: #0075a7 !important;
+    // padding: 0 0.5rem;
+  }
+
+  button {
+    border: $border !important;
+    padding: 0.3rem !important;
+    background: #f5f5f5 !important;
+    color: #0075a7 !important;
+    font-size: 1rem !important;
+    cursor: pointer !important;
+  }
+}
+
+.v-application--is-ltr .v-text-field .v-counter {
+  margin-left: 8px !important;
+  margin-right: 6% !important;
+}
+
+.theme--light.v-chip:not(.v-chip--active) {
+  background: #e0e0e000 !important;
+}
+
+.row {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  flex: 1 1 auto !important;
+  margin: 0px !important;
+}
+// .theme--light.v-input input,
+// .theme--light.v-input textarea {
+//   color: #1a237e;
+// }
+
+.theme--light.v-chip {
+  background: #b6e0de00 !important;
+}
+
+.btn {
+  margin-top: 2% !important;
+  margin-bottom: 2% !important;
+  margin-left: 1% !important;
+}
+
+.btn2 {
+  margin-left: 3% !important;
+}
+
+.theme--light.v-label {
+  font-family: "Franklin Gothic Medium", sans-serif !important;
+  // font-size: 0.9rem;
+}
+
+.v-expansion-panel {
+  flex: 1 0 100% !important;
+  max-width: 90% !important;
+  position: relative !important;
+  transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1) !important;
+}
+
+.v-sheet.v-card:not(.v-sheet--outlined) {
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0),
+    0px 2px 2px 0px rgba(0, 0, 0, 0), 0px 1px 5px 0px rgba(0, 0, 0, 0) !important;
+}
+
+.v-stepper__step__step {
+  align-items: center !important;
+  border-radius: 0 !important;
+  display: inline-flex !important;
+  font-size: 0.75rem !important;
+  justify-content: center !important;
+  height: 24px !important;
+  min-width: 24px !important;
+  width: 24px !important;
+  transition: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+}
+
+.v-text-field--outlined.v-input--dense .v-label {
+  top: auto !important;
+}
+
+.theme--light.v-icon {
+  color: #05a0bf !important;
+}
+
+.logo-new {
+  height: 45px !important;
+  width: auto !important;
+}
+
+.theme--light.v-input input, .theme--light.v-input textarea {
+  color: #ffffff;
+}
+
+.loader-logo {
+  height: 40px !important;
+  width: auto !important;
+}
+
+.organization_logo {
+  height: 45px !important;
+  width: auto !important;
+  padding-left: 10px !important;
+  display: block !important;
+}
+
+.loaderBackground {
+  position: absolute !important;
+  height: 100% !important;
+  width: 100% !important;
+  background-color: #001736 !important;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 100;
+  opacity: 0.4;
+}
+.v-text-field input {
+  flex: 1 1 auto !important;
+  line-height: 20px !important;
+  padding: 8px 0 8px !important;
+  max-width: 100% !important;
+  min-width: 0px !important;
+  width: auto !important;
+}
+// Highchart Start
+
+.name {
+  width: 190px;
+}
+.value {
+  width: 60px;
+}
+
+.container {
+  max-width: none !important;
+}
+
+// Highchart End
+
+@import "./overwrite";
