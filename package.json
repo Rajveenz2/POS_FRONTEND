@@ -28,7 +28,6 @@
     "vue-cookies": "^1.5.13",
     "vue-json-edit-modal": "github:melvinchng/vue-json-edit-modal",
     "vue-json-editor": "^1.4.0",
-    "vue-navigation-bar": "^5.0.2",
     "vue-number-animation": "^1.0.5",
     "vue-particles": "^1.0.9",
     "vue-quill-editor": "^3.0.6",
