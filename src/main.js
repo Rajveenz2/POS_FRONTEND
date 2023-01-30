@@ -55,7 +55,7 @@ axios.interceptors.response.use(undefined, function (error) {
 
     window.$cookies.remove("izcToken")
 
-    router.replace({ name: 'Login' });
+    router.replace({ name: '/' });
   }
 
   if (error.response && error.response.status === 400) {

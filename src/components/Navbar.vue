@@ -6,23 +6,11 @@
       v-show="$vuetify.breakpoint.smAndUp"
       @click="$router.push({ name: 'home' })"
     />
-    <!-- <v-btn
-      class="dashboardlogo"
-      icon
-      :href="
-        `${dashboardUrl}/login?user=${$store.state.userProfile.email}&password=${$store.state.userProfile.password}`
-      "
-      target="_blank"
-      >
-      <v-icon color="#0075a7">mdi-view-dashboard</v-icon><v-toolbar-title class="dashboard">
-        Dashboard
-      </v-toolbar-title></v-btn
-    > -->
 
     <v-spacer></v-spacer>
 
     <v-toolbar-title class="username">
-      RS
+      {{ name }}
     </v-toolbar-title>
 
     <v-btn icon @click="account()">
@@ -42,15 +30,14 @@ export default {
   },
   data() {
     return {
-      // dashboardUrl: process.env.VUE_APP_DASHBOARD_URL,
+      name : this.$store.state.userProfile.name
     };
   },
 
   computed: {
     nameToInitials() {
       try {
-        // let name = this.$store.state.userProfile.name;
-        let name = 'Rajveender Singh';
+        let name = this.$store.state.userProfile.name;
         return name
           .split(" ")
           .map((x) => x.charAt(0))
@@ -77,9 +64,9 @@ export default {
     account() {
       this.$router.push({ path: `/home` });
     },
-    // logout() {
-    //   window.getApp.$emit("APP_LOGOUT");
-    // },
+    logout() {
+      window.getApp.$emit("APP_LOGOUT");
+    },
   },
 };
 </script>

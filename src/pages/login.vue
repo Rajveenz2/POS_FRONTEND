@@ -102,8 +102,8 @@
 </template>
 
 <script>
-// import DataService from "../services/dataService.js";
-// const dataService = new DataService();
+import DataService from "../services/dataService.js";
+const dataService = new DataService();
 
 export default {
   data() {
@@ -133,23 +133,25 @@ export default {
       this.$router.push({ path: `/home` });
     },
     async login() {
-      // try {
-      //   let loginDto = {
-      //     email: this.email.toLowerCase(),
-      //     password: this.password,
-      //   };
-      //   await dataService.login(loginDto).then((res) => {
-      //     this.$store.state.user = res.data.user;
-      //     this.$store.state.code = this.password;
-      //     window.$cookies.set("ifeedToken", res.data.token);
-      //     this.$router.push({ path: `/products` });
-      //   });
-      // } catch (error) {
-      //   // alert("Error 1000 - Page does not exists!")
-      // }
-      this.$setLoader();
-      this.$router.push({ path: `/home` });
-      this.$disableLoader();
+      try {
+        this.$setLoader();
+        let loginDto = {
+          email: this.email.toLowerCase(),
+          password: this.password,
+        };
+        await dataService.login(loginDto).then((res) => {
+          this.$store.state.user = res.data.user;
+          this.$store.state.code = this.password;
+          window.$cookies.set("posToken", res.data.token);
+          this.$router.push({ path: `/home` });
+        });
+        this.$disableLoader();
+      } catch (error) {
+        // alert("Error 1000 - Page does not exists!")
+      }
+      // this.$setLoader();
+      // this.$router.push({ path: `/home` });
+      // this.$disableLoader();
     },
   },
 };

@@ -26,8 +26,8 @@
           :class="{ 'on-hover': hover }"
           :elevation="hover ? 12 : 16"
           ><v-card-text class="text"
-            >Welcome Rajveender Singh , please click on any of the box below for
-            futher explanation.</v-card-text
+            >Welcome {{ name }} , please click on
+            any of the box below for futher explanation.</v-card-text
           >
           <v-row no-gutters class="justify-center align-center">
             <v-col cols="5"
@@ -80,28 +80,17 @@
 </template>
 
 <script>
-import debounce from "lodash/debounce";
 export default {
   data() {
-    return {};
+    return {
+      name : this.$store.state.userProfile.name
+    };
   },
-  mounted: function() {
-    this.$setLoader();
-    this.$nextTick(function() {
-      this.updated();
-      // Code that will run only after the
-      // entire view has been rendered
-    });
+  mounted: function () {
+   
   },
 
   methods: {
-    updated: debounce(function() {
-      this.$nextTick(() => {
-        console.log("test");
-        this.$disableLoader(); // runs only once
-      });
-    }, 1500), // increase to ur needs
-
     inventory() {
       this.$setLoader();
       this.$router.push({ path: `/inventory` });

@@ -7,8 +7,8 @@ export default [
     name: 'APP_LOGOUT',
     callback: function () {
       dataService.logout({'_id' : this.$store.state.user.userId})
-      window.$cookies.remove('izcToken')
-      window.$cookies.remove('izcRole')
+      window.$cookies.remove('posToken')
+      window.$cookies.remove('posRole')
       this.$store.state.userProfile = {}
       this.$router.replace({ name: 'login' });
     }

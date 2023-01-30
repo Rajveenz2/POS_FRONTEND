@@ -8,35 +8,35 @@ export default [
 
   {
     path: "/home",
-    meta: { layout: "default", guest: true, renderNavBar: true },
+    meta: { layout: "default", noScroll: true, renderNavBar: true },
     name: "home",
     component: () => import("@/pages/home.vue"),
   },
 
   {
     path: "/inventory",
-    meta: { layout: "default", guest: true, renderNavBar: true },
+    meta: { layout: "default", noScroll: true, renderNavBar: true },
     name: "inventory",
     component: () => import("@/pages/inventory.vue"),
   },
   
   {
     path: "/sales",
-    meta: { layout: "default", guest: true, renderNavBar: true },
+    meta: { layout: "default", noScroll: true, renderNavBar: true },
     name: "sales",
     component: () => import("@/pages/sales.vue"),
   },
 
   {
     path: "/tables",
-    meta: { layout: "default", guest: true, renderNavBar: true },
+    meta: { layout: "default", noScroll: true, renderNavBar: true },
     name: "tables",
     component: () => import("@/pages/tables.vue"),
   },
 
   {
     path: "/staff",
-    meta: { layout: "default", guest: true, renderNavBar: true },
+    meta: { layout: "default", noScroll: true, renderNavBar: true },
     name: "staff",
     component: () => import("@/pages/staff.vue"),
   },

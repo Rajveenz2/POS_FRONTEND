@@ -29,13 +29,12 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.guest)) {
     next()
   } else {
-    if (window.$cookies.get('ifeedToken') == null) {
-      next({ name: 'home' })
+    if (window.$cookies.get('posToken') == null) {
+      next({ name: '/' })
     } else {
 
       // Extend session for another hour
-      window.$cookies.set('ifeedToken', window.$cookies.get('ifeedToken'))
-
+      window.$cookies.set('posToken', window.$cookies.get('posToken'))
       if (Object.keys(store.state.user).length == 0 || Object.keys(store.state.userProfile).length == 0) {
         store.state.loader = true
 
