@@ -10,8 +10,6 @@ import axios from 'axios'
 import JsonEditor from 'vue-json-edit-modal'
 import VueParticles from 'vue-particles'
 Vue.use(VueParticles)
-import JwPagination from 'jw-vue-pagination';
-Vue.component('jw-pagination', JwPagination);
 
 import Default from './layouts/Default';
 import 'quill/dist/quill.core.css' // import styles
