@@ -11,9 +11,10 @@
   background-color: #2c2424 !important;
 }
 
-// .theme--light.v-card > .v-card__text {
-//   color: inherit !important;;
-// }
+.theme--light.v-footer {
+  background-color: transparent !important;
+  color: rgba(0, 0, 0, 0.87) !important;
+}
 
 .theme--light.v-messages {
   color: #2ca8a0 !important;
@@ -240,7 +241,8 @@ $border: 1px solid #2ca8a0;
   width: auto !important;
 }
 
-.theme--light.v-input input, .theme--light.v-input textarea {
+.theme--light.v-input input,
+.theme--light.v-input textarea {
   color: inherit !important;
 }
 
