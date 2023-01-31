@@ -26,8 +26,8 @@
           :class="{ 'on-hover': hover }"
           :elevation="hover ? 12 : 16"
           ><v-card-text class="text"
-            >Welcome {{ name }} , please click on
-            any of the box below for futher explanation.</v-card-text
+            >Welcome {{ name }} , please click on any of the box below for
+            futher explanation.</v-card-text
           >
           <v-row no-gutters class="justify-center align-center">
             <v-col cols="5"
@@ -47,7 +47,7 @@
                 :elevation="hover ? 12 : 16"
                 @click="inventory"
                 ><v-card-title class="text1">Total Items</v-card-title>
-                <v-card-title class="header">80</v-card-title></v-card
+                <v-card-title class="header">{{ productLength }}</v-card-title></v-card
               ></v-col
             >
           </v-row>
@@ -80,20 +80,32 @@
 </template>
 
 <script>
+import DataService from "../services/dataService.js";
+const dataService = new DataService();
 export default {
   data() {
     return {
-      name : this.$store.state.userProfile.name
+      name: this.$store.state.userProfile.name,
+      productLength: []
     };
   },
   mounted: function () {
-   
+    this.getProductsLength();
   },
 
   methods: {
     inventory() {
       this.$setLoader();
       this.$router.push({ path: `/inventory` });
+      this.$disableLoader();
+    },
+
+    async getProductsLength() {
+      this.$setLoader();
+      await dataService.getProducts().then((res) => {
+        this.productLength = res.data.products.length;
+      });
+
       this.$disableLoader();
     },
 
@@ -119,7 +131,7 @@ export default {
 }
 
 #particles-js {
-  background-color: #fff;
+  background-color: #001736;
   position: absolute;
   width: 100%;
   height: 100%;
@@ -135,7 +147,7 @@ export default {
   height: auto;
   place-items: center;
   color: #ffffff;
-  background-color: #001736;
+  background-color: transparent;
   padding-bottom: 3%;
 }
 .grid1 {

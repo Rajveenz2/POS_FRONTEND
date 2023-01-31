@@ -61,6 +61,7 @@
                   <v-col>
                     <v-card-text class="text">Password</v-card-text>
                     <v-text-field
+                      class="text"
                       prepend-icon="mdi-lock-outline"
                       color="#0075a7"
                       v-model="password"
@@ -221,7 +222,9 @@ export default {
 .text {
   color: #ffffff !important;
 }
-
+.theme--light.v-input input, .theme--light.v-input textarea, .text {
+  color: #ffffff !important;
+}
 .v-btn > .v-btn__content .v-icon {
   color: #05a0bf;
   margin-right: 5px;

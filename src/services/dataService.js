@@ -26,4 +26,24 @@ export default class RestResource {
     axios.defaults.headers.common["Authorization"] = window.$cookies.get("posToken");
     return axios.post(`${BACKEND_URL}/admin/auth/whoAmI`, data);
   }
+
+  async getProducts(params) {
+    return await axios.post(`${BACKEND_URL}/product/getProducts`, params, Util.setupHeaders());
+  }
+  
+  async getProduct(params) {
+    return await axios.post(`${BACKEND_URL}/product/getProduct`, params, Util.setupHeaders());
+  }
+
+  async addProduct(params) {
+    return await axios.post(`${BACKEND_URL}/product/addProduct`, params, Util.setupHeaders());
+  }
+
+  async updateProduct(params) {
+    return await axios.post(`${BACKEND_URL}/product/updateProduct`, params, Util.setupHeaders());
+  }
+
+  async deleteProduct(params) {
+    return await axios.post(`${BACKEND_URL}/product/deleteProduct`, params, Util.setupHeaders());
+  }
 }

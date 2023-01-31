@@ -19,6 +19,13 @@ export default [
     name: "inventory",
     component: () => import("@/pages/inventory.vue"),
   },
+
+  {
+    path: "/product/:cardId",
+    name: "product",
+    meta: { layout: "default", renderNavBar: true },
+    component: () => import("@/pages/product.vue"),
+  },
   
   {
     path: "/sales",
