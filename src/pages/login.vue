@@ -91,7 +91,7 @@
       </v-container>
     </v-form>
 
-    <v-footer padless class="footer">
+    <v-footer padless class="footer" color="transparent">
       <v-card-text class="footer">
         Copyright {{ new Date().getFullYear() }} ©
         <a href="https://www.facebook.com/" target="_blank" class="company-link"
