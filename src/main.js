@@ -39,7 +39,7 @@ axios.interceptors.response.use(undefined, function (error) {
 
     window.$cookies.remove("posToken");
 
-    router.replace({ name: "/" });
+    router.replace({ name: "login" });
   }
 
   if (error.response && error.response.status === 400) {
