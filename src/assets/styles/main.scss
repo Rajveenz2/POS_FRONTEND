@@ -57,7 +57,7 @@
 }
 
 .v-application .blue {
-  background-color: #2aaba0 !important;
+  background-color: #001736 !important;
   border-color: #0075a7 !important;
 }
 
@@ -86,7 +86,7 @@
 }
 
 .theme--light.v-data-table > .v-data-table__wrapper > table > thead > tr > th {
-  color: rgb(255, 255, 255) !important;
+  color: #ffffff !important;
 }
 
 .v-toolbar__title {
@@ -230,6 +230,10 @@ $border: 1px solid #2ca8a0;
 
 .v-text-field--outlined.v-input--dense .v-label {
   top: auto !important;
+}
+
+.v-card__text {
+  width: inherit !important;
 }
 
 .theme--light.v-icon {

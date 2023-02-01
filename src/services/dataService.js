@@ -46,4 +46,20 @@ export default class RestResource {
   async deleteProduct(params) {
     return await axios.post(`${BACKEND_URL}/product/deleteProduct`, params, Util.setupHeaders());
   }
+
+  async getTables(params) {
+    return await axios.post(`${BACKEND_URL}/table/getTables`, params, Util.setupHeaders());
+  }
+
+  async getTableslength(params) {
+    return await axios.post(`${BACKEND_URL}/table/getTableslength`, params, Util.setupHeaders());
+  }
+
+  async addTable(params) {
+    return await axios.post(`${BACKEND_URL}/table/addTable`, params, Util.setupHeaders());
+  }
+
+  async deleteTable(params) {
+    return await axios.post(`${BACKEND_URL}/table/deleteTable`, params, Util.setupHeaders());
+  }
 }

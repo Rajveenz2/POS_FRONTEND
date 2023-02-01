@@ -47,7 +47,9 @@
                 :elevation="hover ? 12 : 16"
                 @click="inventory"
                 ><v-card-title class="text1">Total Items</v-card-title>
-                <v-card-title class="header">{{ productLength }}</v-card-title></v-card
+                <v-card-title class="header">{{
+                  productLength
+                }}</v-card-title></v-card
               ></v-col
             >
           </v-row>
@@ -59,7 +61,9 @@
                 :elevation="hover ? 12 : 16"
                 @click="tables"
                 ><v-card-title class="text1">Tables Occupied</v-card-title>
-                <v-card-title class="header">10 out of 15</v-card-title></v-card
+                <v-card-title class="header"
+                  >{{ tablesLength.active }} out of {{ tablesLength.tables }}</v-card-title
+                ></v-card
               ></v-col
             >
             <v-col cols="5"
@@ -86,20 +90,16 @@ export default {
   data() {
     return {
       name: this.$store.state.userProfile.name,
-      productLength: []
+      productLength: [],
+      tablesLength: [],
     };
   },
   mounted: function () {
     this.getProductsLength();
+    this.getTablesLength();
   },
 
   methods: {
-    inventory() {
-      this.$setLoader();
-      this.$router.push({ path: `/inventory` });
-      this.$disableLoader();
-    },
-
     async getProductsLength() {
       this.$setLoader();
       await dataService.getProducts().then((res) => {
@@ -109,16 +109,31 @@ export default {
       this.$disableLoader();
     },
 
+    inventory() {
+      this.$setLoader();
+      this.$router.push({ path: `/inventory` });
+      this.$disableLoader();
+    },
+
+    async getTablesLength() {
+      this.$setLoader();
+      await dataService.getTableslength().then((res) => {
+        this.tablesLength = res.data.tablesLength;
+      });
+
+      this.$disableLoader();
+    },
+
+    tables() {
+      this.$router.push({ path: `/tables` });
+    },
+
     sales() {
       this.$router.push({ path: `/sales` });
     },
 
     staff() {
       this.$router.push({ path: `/staff` });
-    },
-
-    tables() {
-      this.$router.push({ path: `/tables` });
     },
   },
 };
