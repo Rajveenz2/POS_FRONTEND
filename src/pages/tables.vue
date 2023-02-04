@@ -19,34 +19,6 @@
         clickMode="push"
       >
       </vue-particles>
-<<<<<<< Updated upstream
-      <v-card class="grid" width="80%" shaped
-        ><v-card class="grid2" color="transparent"
-          ><v-row dense
-            ><v-col class="colclass"
-              ><v-card color="#F5F7FA" class="grid4"
-                ><v-card-text>
-                  <v-text-field
-                    v-model="tables.length"
-                    readonly
-                    prepend-icon="mdi-table-picnic"
-                    label="Search"
-                    flat
-                    solo
-                    hide-details
-                  ></v-text-field></v-card-text></v-card></v-col
-            ><v-col class="colclass"
-              ><v-card color="#F5F7FA" class="grid4"
-                ><v-card-text>
-                  <v-text-field
-                    v-model="search"
-                    append-icon="mdi-magnify"
-                    label="Search"
-                    single-line
-                    hide-details
-                  ></v-text-field> </v-card-text></v-card></v-col
-          ></v-row>
-=======
       <v-card class="grid" width="80%" shaped color="transparent"
         ><v-card class="grid2" color="transparent">
           <v-card color="transparent" class="grid4">
@@ -61,93 +33,11 @@
               color="#fff"
             ></v-text-field
           ></v-card>
->>>>>>> Stashed changes
           <v-data-table
             :headers="headers"
             :items="tables"
-            :search="search"
             :sort-by="['tableStatus']"
             :sort-desc="[false, true]"
-<<<<<<< Updated upstream
-          ></v-data-table
-          ><v-row class="justify-center align-center" no-gutters>
-            <v-btn class="btn" color="#05a0bf" @click="addTable()">
-              Add Table
-            </v-btn>
-            <v-btn class="btn" color="#05a0bf" @click="deleteTable()">
-              Delete Table
-            </v-btn></v-row
-          ></v-card
-        ><v-card v-if="showAddTable" class="grid3" width="50%">
-          <div class="grid">
-            <v-card class="grid" width="95%">
-              <v-card-title class="producttitle"
-                >Enter the table number</v-card-title
-              >
-              <v-text-field
-                class="cardtitle"
-                prepend-icon="mdi-table-picnic"
-                color="#0075a7"
-                v-model="table.tableNumber"
-                solo
-                dense
-              >
-              </v-text-field
-            ></v-card>
-            <v-row class="justify-center align-center" no-gutters>
-              <v-btn
-                v-if="table.tableNumber"
-                color="#05a0bf"
-                @click="addTablee()"
-                class="btn"
-              >
-                Continue
-              </v-btn>
-              <v-btn text @click="showAddTable = false"> Cancel </v-btn></v-row
-            >
-          </div></v-card
-        ><v-card v-if="showdeleteTable" class="grid3" width="50%">
-          <div class="grid">
-            <v-card class="grid" width="95%">
-              <v-card-title class="producttitle"
-                >Enter the table numberrrr</v-card-title
-              >
-              <v-autocomplete
-                prepend-icon="mdi-vector-selection"
-                color="#05a0bf"
-                :items="tables"
-                item-text="tableId"
-                item-value="tableId"
-                v-model="table.tableId"
-                multiple
-                required
-                small-chips
-                solo
-                clearable
-                deletable-chips
-                data-vv-name="category"
-                :error-messages="errors.collect('category')"
-              ></v-autocomplete
-            ></v-card>
-            <v-row class="justify-center align-center" no-gutters>
-              <v-btn
-                v-if="table.tableId"
-                color="#05a0bf"
-                @click="deleteTablee()"
-                class="btn"
-              >
-                Continue
-              </v-btn>
-              <v-btn text @click="showdeleteTable = false">
-                Cancel
-              </v-btn></v-row
-            >
-          </div></v-card
-        >
-      </v-card>
-    </v-container>
-  </v-app>
-=======
             :footer-props="{
               'items-per-page-options': [15, 30, 45, 60, 75],
             }"
@@ -193,24 +83,18 @@
                   <v-card-text class="cardtitle">
                     <span class="text-h5">{{ formTitle }}</span>
                   </v-card-text>
-
-                  <v-card-text>
-                    <v-card color="transparent">
-                      <v-row>
-                        <v-col cols="12" sm="6" md="4">
-                          <v-text-field
-                            v-model="editedItem.tableNumber"
-                            label="Table Number"
-                            flat
-                            solo
-                            hide-details
-                            class="custom-label-color"
-                            color="#fff"
-                          ></v-text-field>
-                        </v-col>
-                      </v-row>
-                    </v-card>
-                  </v-card-text>
+                  <v-card color="transparent" class="grid3">
+                    <v-card-text class="producttitle"
+                      >Enter a Table Number</v-card-text
+                    >
+                    <v-text-field
+                      v-model="editedItem.tableNumber"
+                      flat
+                      solo
+                      class="custom-form-color"
+                      color="#fff"
+                    ></v-text-field>
+                  </v-card>
 
                   <v-card-actions>
                     <v-spacer></v-spacer>
@@ -267,7 +151,6 @@
       ></v-container
     ></v-app
   >
->>>>>>> Stashed changes
 </template>
 
 <script>
@@ -277,8 +160,12 @@ const dataService = new DataService();
 export default {
   data() {
     return {
+      dialog: false,
+      dialogDelete: false,
       table: {},
       tables: [],
+      editedIndex: -1,
+      editedItem: {},
       search: "",
       headers: [
         {
@@ -293,7 +180,6 @@ export default {
           align: "center",
           class: "Dark blue",
           value: "tableId",
-          sortable: false,
         },
         {
           text: "Table Status",
@@ -309,6 +195,14 @@ export default {
           sortable: false,
           filterable: false,
         },
+        {
+          text: "Actions",
+          align: "center",
+          class: "Dark blue",
+          value: "actions",
+          sortable: false,
+          filterable: false,
+        },
       ],
       showAddTable: false,
       showdeleteTable: false,
@@ -319,30 +213,30 @@ export default {
     this.getTables();
   },
 
+  computed: {
+    formTitle() {
+      return this.editedIndex === -1 ? "New Table" : "New Table";
+    },
+  },
+
   methods: {
     async getTables() {
-      this.$setLoader();
-      await dataService.getTables().then((res) => {
-        this.tables = res.data.tables;
-      });
+      try {
+        this.$setLoader();
+        await dataService.getTables().then((res) => {
+          this.tables = res.data.tables;
+        });
 
-      this.$disableLoader();
+        this.$disableLoader();
+      } catch (error) {
+        alert(error.response.data.message)
+      }
     },
 
     addTable() {
       this.showAddTable = true;
       this.showdeleteTable = false;
     },
-
-<<<<<<< Updated upstream
-    async addTablee() {
-      this.$setLoader();
-      await dataService.addTable(this.table).then((res) => {
-        console.log(res);
-        this.$router.go(0);
-      });
-      this.$disableLoader();
-=======
     async addTablee(table) {
       try {
         this.$setLoader();
@@ -355,7 +249,6 @@ export default {
       } catch (error) {
         console.log(error);
       }
->>>>>>> Stashed changes
     },
 
     deleteTable() {
@@ -363,16 +256,14 @@ export default {
       this.showdeleteTable = true;
     },
 
-    async deleteTablee() {
+    async deleteTablee(cardId) {
       this.$setLoader();
-      await dataService.deleteTable(this.table).then((res) => {
+      await dataService.deleteTable({ _id: cardId }).then((res) => {
         console.log(res);
         this.$router.go(0);
       });
       this.$disableLoader();
     },
-<<<<<<< Updated upstream
-=======
 
     editItem(item) {
       this.editedIndex = this.tables.indexOf(item);
@@ -410,7 +301,6 @@ export default {
       this.$router.push({ path: `/orders/${cardId}` });
       this.$disableLoader();
     },
->>>>>>> Stashed changes
   },
 };
 </script>
@@ -519,7 +409,7 @@ export default {
   text-decoration: none;
   text-align: center;
   font-weight: bold;
-  color: #001736;
+  color: #fff !important;
   justify-content: center;
   align-items: center;
 }

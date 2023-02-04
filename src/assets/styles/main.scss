@@ -14,6 +14,10 @@
 .v-text-field.v-text-field--solo .v-input__control input {
   text-align: center !important;
   justify-content: center;
+  color: inherit !important;
+}
+
+.theme--light.v-input {
   color: #fff !important;
 }
 
@@ -23,7 +27,7 @@
 }
 
 .theme--light.v-messages {
-  color: #2ca8a0 !important;
+  color: #0075a7 !important;
   font-weight: bolder !important;
   margin-left: 1% !important;
 }
@@ -43,7 +47,7 @@
 .theme--light.v-label {
   font-family: "Franklin Gothic Medium", sans-serif !important;
   font-size: 1rem !important;
-  color: rgb(0, 0, 0) !important;
+  color: inherit !important;
 }
 
 // .theme--light.v-stepper
@@ -102,7 +106,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: #2ca8a0;
+  color: #0075a7;
   font-weight: bolder;
 }
 
@@ -135,15 +139,15 @@
 }
 
 .v-application .success--text {
-  color: #2ca8a0 !important;
-  caret-color: #2ca8a0 !important;
+  color: #0075a7 !important;
+  caret-color: #0075a7 !important;
 }
 
 .v-application .mb-6 {
   margin-bottom: 2px !important;
 }
 
-$border: 1px solid #2ca8a0;
+$border: 1px solid #0075a7;
 .quantity-toggle {
   display: flex !important;
   margin-top: 1% !important;
@@ -177,7 +181,7 @@ $border: 1px solid #2ca8a0;
 }
 
 .theme--light.v-chip:not(.v-chip--active) {
-  background: #e0e0e000 !important;
+  background: #fff !important;
 }
 
 .row {
@@ -238,8 +242,6 @@ $border: 1px solid #2ca8a0;
   top: auto !important;
 }
 
-<<<<<<< Updated upstream
-=======
 .theme--light.v-data-table {
   background-color: #fff0 !important;
   color: rgba(255, 255, 255, 0.87) !important;
@@ -290,7 +292,6 @@ $border: 1px solid #2ca8a0;
   background-color: #000000 !important;
 }
 
->>>>>>> Stashed changes
 .v-card__text {
   width: inherit !important;
 }
@@ -320,12 +321,20 @@ $border: 1px solid #2ca8a0;
 }
 .custom-label-color .v-label {
   color: #fff !important;
-  
 }
 
 .custom-placeholder-color input,
 .custom-label-color input {
   color: #fff !important;
+}
+
+.custom-form-color .v-label {
+  color: #fff !important;
+}
+
+.custom-form-color input {
+  color: #fff !important;
+  background-color: #09000094 !important;
 }
 
 .organization_logo {

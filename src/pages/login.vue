@@ -228,6 +228,7 @@ export default {
   text-align: center;
   background-color: #fff0;
   margin-top: 1%;
+  width: 100% !important;
 }
 
 .text {

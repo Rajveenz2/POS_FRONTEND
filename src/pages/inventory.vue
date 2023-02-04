@@ -228,7 +228,7 @@
                         color="#0075a7"
                         v-model="newProduct.productCategory"
                         readonly
-                        solo
+                        outlined
                       >
                       </v-text-field>
                       <v-text-field
@@ -236,6 +236,8 @@
                         color="#0075a7"
                         v-model="newProduct.productName"
                         readonly
+                        dense
+                        outlined
                         solo
                       >
                       </v-text-field>
@@ -244,7 +246,7 @@
                         color="#0075a7"
                         v-model="newProduct.productPrice"
                         readonly
-                        solo
+                        outlined
                       >
                       </v-text-field>
                       <v-text-field
@@ -252,7 +254,7 @@
                         color="#0075a7"
                         v-model="newProduct.productImageUrl"
                         readonly
-                        solo
+                        outlined
                       >
                       </v-text-field>
                       <v-text-field
@@ -260,6 +262,7 @@
                         color="#0075a7"
                         v-model="newProduct.productDesc"
                         readonly
+                        outlined
                         solo
                       >
                       </v-text-field

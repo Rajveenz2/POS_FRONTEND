@@ -42,8 +42,6 @@ export default [
   },
 
   {
-<<<<<<< Updated upstream
-=======
     path: "/orders/:cardId",
     meta: { layout: "default", noScroll: true, renderNavBar: true },
     name: "orders",
@@ -65,7 +63,6 @@ export default [
   },
 
   {
->>>>>>> Stashed changes
     path: "/staff",
     meta: { layout: "default", noScroll: true, renderNavBar: true },
     name: "staff",

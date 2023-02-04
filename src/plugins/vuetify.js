@@ -6,7 +6,7 @@ var randomMC = require('random-material-color');
 
 Vue.use(Vuetify);
 
-let color = (VueCookies.get('posRole') == "ADMIN") ? randomMC.getColor({ shades: ['400', '500', '600', '700', '800']}) : "#0C9780"
+let color = (VueCookies.get('posRole') == "ADMIN") ? randomMC.getColor({ shades: ['400', '500', '600', '700', '800']}) : "#05a0bf"
 
 export default new Vuetify({
   icons: {
