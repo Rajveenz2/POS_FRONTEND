@@ -277,65 +277,76 @@
               </v-stepper>
             </div></v-card
           >
-          <v-row dense
-            ><v-col :cols="2" class="colclass"
-              ><v-card
-                shaped
-                height="300px"
+          <v-card
+            class="grid2"
+            shaped
+            height="auto"
+            width="350px"
+            :class="{ 'on-hover': hover }"
+            :elevation="hover ? 12 : 16"
+            @click="addProducts = true"
+            color="#F5F7FA"
+            ><v-card class="grid">
+              <v-img
+                :src="url"
+                class="white--text align-end"
+                height="150px"
                 width="350px"
-                :class="{ 'on-hover': hover }"
-                :elevation="hover ? 12 : 16"
-                @click="addProducts = true"
-                color="#F5F7FA"
-                ><v-card class="grid">
-                  <v-img
-                    :src="url"
-                    class="white--text align-end"
-                    height="150px"
-                    width="350px"
-                  >
-                  </v-img>
-                  <v-card-text
-                    class="cardtitle"
-                    v-text="name"
-                  ></v-card-text></v-card></v-card
-            ></v-col>
-            <v-col
-              v-for="product in products"
-              :key="product._id"
-              :cols="2"
-              class="colclass"
-            >
-              <v-card
-                shaped
-                height="300px"
-                width="350px"
-                :class="{ 'on-hover': hover }"
-                :elevation="hover ? 12 : 16"
-                @click="select(product._id)"
-                color="#F5F7FA"
               >
-                <v-img
-                  :src="product.productImageUrl"
-                  class="white--text align-end"
-                  height="150px"
-                  width="350px"
-                >
-                </v-img>
-                <v-card-text
-                  class="cardtitle"
-                  v-text="product.productName"
-                ></v-card-text>
-                <v-card-text class="carddesc">
-                  RM {{ product.productPrice }}</v-card-text
-                >
-                <v-card-text
-                  class="carddesc2"
-                  v-text="product.productDesc"
-                ></v-card-text>
-              </v-card>
-            </v-col>
-          </v-row>
+              </v-img>
+              <v-card-text
+                class="cardtitle"
+                v-text="name"
+              ></v-card-text></v-card
+          ></v-card>
+          <v-card color="transparent" class="grid2">
+            <v-data-table
+              :headers="headers"
+              :items="products"
+              :sort-by="['productCategory']"
+              :sort-desc="[false, true]"
+              :footer-props="{
+                'items-per-page-options': [15, 30, 45, 60, 75],
+              }"
+              :items-per-page="15"
+              class="elevation-1"
+            >
+              <template v-slot:item="{ item }">
+                <tr>
+                  <td @click="select(item._id)">
+                    <div class="d-flex justify-center">
+                      {{ item.productName }}
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex justify-center ma-4">
+                      <v-img
+                        height="250px"
+                        width="250px"
+                        :src="item.productImageUrl"
+                        @click="select(item._id)"
+                      />
+                    </div>
+                  </td>
+                  <td @click="select(item._id)">
+                    <div class="d-flex justify-center">
+                      {{ item.productCategory }}
+                    </div>
+                  </td>
+                  <td @click="select(item._id)">
+                    <div class="d-flex justify-center">
+                      {{ item.productDesc }}
+                    </div>
+                  </td>
+                  <td>
+                    <v-icon @click="deleteProduct(item._id)">
+                      mdi-delete
+                    </v-icon>
+                  </td>
+                </tr>
+              </template>
+            </v-data-table>
+          </v-card>
         </v-card>
       </v-hover>
     </v-container>
@@ -350,12 +361,49 @@ export default {
   data() {
     return {
       products: [],
+      headers: [
+        {
+          text: "Name",
+          align: "center",
+          class: "Dark blue",
+          value: "productName",
+          sortable: false,
+        },
+        {
+          text: "Image",
+          align: "center",
+          class: "Dark blue",
+          value: "productImageUrl",
+          sortable: false,
+        },
+        {
+          text: "Category",
+          align: "center",
+          class: "Dark blue",
+          value: "productCategory",
+        },
+        {
+          text: "Description",
+          align: "center",
+          class: "Dark blue",
+          value: "productDesc",
+          sortable: false,
+        },
+        {
+          text: "Actions",
+          value: "actions",
+          align: "center",
+          class: "Dark blue",
+          sortable: false,
+        },
+      ],
       newProduct: {},
       addProducts: false,
       e1: 1,
       valid: true,
       preview: [],
-      url: "http://res.cloudinary.com/de3gn7o77/image/upload/v1675119701/v5u4sg7q6h5abcamqing.png",
+      url:
+        "http://res.cloudinary.com/de3gn7o77/image/upload/v1675119701/v5u4sg7q6h5abcamqing.png",
       name: "Click Here to Add a New Product",
       categories: ["Food", "Beverage"],
       rules: {
@@ -402,7 +450,7 @@ export default {
     uploadFileToCloudinary(file) {
       this.preview = null;
       console.log(file);
-      return new Promise(function (resolve, reject) {
+      return new Promise(function(resolve, reject) {
         let formData = new FormData();
         formData.append(
           "upload_preset",
@@ -442,6 +490,19 @@ export default {
         this.$router.go(0);
       });
 
+      this.$disableLoader();
+    },
+
+    async deleteProduct(productId) {
+      let data = {
+        _id: productId,
+      };
+
+      this.$setLoader();
+      await dataService.deleteProduct(data).then((res) => {
+        console.log(res);
+      });
+      this.$router.go(0);
       this.$disableLoader();
     },
   },
@@ -554,5 +615,11 @@ export default {
   padding-right: 8px !important;
   padding-bottom: 8px !important;
   padding-left: 8px !important;
+}
+.green-bg {
+  display: table-row;
+}
+.green-bg:hover {
+  background: #000000 !important;
 }
 </style>

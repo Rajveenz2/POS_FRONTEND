@@ -19,6 +19,7 @@
         clickMode="push"
       >
       </vue-particles>
+<<<<<<< Updated upstream
       <v-card class="grid" width="80%" shaped
         ><v-card class="grid2" color="transparent"
           ><v-row dense
@@ -45,12 +46,29 @@
                     hide-details
                   ></v-text-field> </v-card-text></v-card></v-col
           ></v-row>
+=======
+      <v-card class="grid" width="80%" shaped color="transparent"
+        ><v-card class="grid2" color="transparent">
+          <v-card color="transparent" class="grid4">
+            <v-text-field
+              v-model="tables.length"
+              readonly
+              prepend-icon="mdi-table-picnic"
+              flat
+              solo
+              hide-details
+              class="custom-label-color"
+              color="#fff"
+            ></v-text-field
+          ></v-card>
+>>>>>>> Stashed changes
           <v-data-table
             :headers="headers"
             :items="tables"
             :search="search"
             :sort-by="['tableStatus']"
             :sort-desc="[false, true]"
+<<<<<<< Updated upstream
           ></v-data-table
           ><v-row class="justify-center align-center" no-gutters>
             <v-btn class="btn" color="#05a0bf" @click="addTable()">
@@ -129,6 +147,127 @@
       </v-card>
     </v-container>
   </v-app>
+=======
+            :footer-props="{
+              'items-per-page-options': [15, 30, 45, 60, 75],
+            }"
+            :items-per-page="15"
+            :search="search"
+            class="elevation-1"
+          >
+            <template v-slot:top>
+              <v-divider class="mx-4" inset vertical></v-divider>
+              <v-spacer></v-spacer>
+              <v-dialog v-model="dialog" max-width="500px">
+                <template v-slot:activator="{ on, attrs }">
+                  <v-card color="transparent" height="fit-content"
+                    ><v-row dense
+                      ><v-col class="colclass"
+                        ><v-card class="grid4" color="transparent">
+                          <v-text-field
+                            v-model="search"
+                            append-icon="mdi-magnify"
+                            label="Search for a table"
+                            class="custom-label-color"
+                            color="#fff"
+                            >Search</v-text-field
+                          >
+                        </v-card></v-col
+                      ><v-col class="colclass"
+                        ><v-card class="grid4" height="70px" color="transparent"
+                          ><v-btn
+                            color="#05a0bf"
+                            dark
+                            class="mb-2"
+                            v-bind="attrs"
+                            v-on="on"
+                          >
+                            New Table
+                          </v-btn></v-card
+                        ></v-col
+                      ></v-row
+                    ></v-card
+                  >
+                </template>
+                <v-card class="grid4" color="#001736">
+                  <v-card-text class="cardtitle">
+                    <span class="text-h5">{{ formTitle }}</span>
+                  </v-card-text>
+
+                  <v-card-text>
+                    <v-card color="transparent">
+                      <v-row>
+                        <v-col cols="12" sm="6" md="4">
+                          <v-text-field
+                            v-model="editedItem.tableNumber"
+                            label="Table Number"
+                            flat
+                            solo
+                            hide-details
+                            class="custom-label-color"
+                            color="#fff"
+                          ></v-text-field>
+                        </v-col>
+                      </v-row>
+                    </v-card>
+                  </v-card-text>
+
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="blue darken-1" text @click="close">
+                      Cancel
+                    </v-btn>
+                    <v-btn
+                      color="blue darken-1"
+                      text
+                      @click="addTablee(editedItem)"
+                    >
+                      Save
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+            </template>
+            <template v-slot:item="{ item }">
+              <tr>
+                <td @click="select(item._id)">
+                  <div class="d-flex justify-center">
+                    {{ item.tableNumber }}
+                  </div>
+                </td>
+                <td @click="select(item._id)">
+                  <div class="d-flex justify-center">
+                    {{ item.tableId }}
+                  </div>
+                </td>
+                <td @click="select(item._id)">
+                  <div class="d-flex justify-center">
+                    {{ item.tableStatus }}
+                  </div>
+                </td>
+                <td @click="select(item._id)">
+                  <div class="d-flex justify-center">
+                    {{ item.updated_at }}
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex justify-center">
+                    <v-icon small @click="deleteTablee(item)">
+                      mdi-delete
+                    </v-icon>
+                  </div>
+                </td>
+              </tr>
+            </template>
+            <template v-slot:no-data>
+              <v-btn color="primary" @click="getTables"> Reset </v-btn>
+            </template>
+          </v-data-table>
+        </v-card></v-card
+      ></v-container
+    ></v-app
+  >
+>>>>>>> Stashed changes
 </template>
 
 <script>
@@ -163,18 +302,12 @@ export default {
           value: "tableStatus",
         },
         {
-          text: "Created at",
-          align: "center",
-          class: "Dark blue",
-          value: "updated_at",
-          sortable: false,
-        },
-        {
           text: "Updated at",
           align: "center",
           class: "Dark blue",
           value: "updated_at",
           sortable: false,
+          filterable: false,
         },
       ],
       showAddTable: false,
@@ -201,6 +334,7 @@ export default {
       this.showdeleteTable = false;
     },
 
+<<<<<<< Updated upstream
     async addTablee() {
       this.$setLoader();
       await dataService.addTable(this.table).then((res) => {
@@ -208,6 +342,20 @@ export default {
         this.$router.go(0);
       });
       this.$disableLoader();
+=======
+    async addTablee(table) {
+      try {
+        this.$setLoader();
+        await dataService.addTable(table).then((res) => {
+          this.status = res;
+          alert("Successfully added table.");
+          this.$router.go(0);
+        });
+        this.$disableLoader();
+      } catch (error) {
+        console.log(error);
+      }
+>>>>>>> Stashed changes
     },
 
     deleteTable() {
@@ -223,6 +371,46 @@ export default {
       });
       this.$disableLoader();
     },
+<<<<<<< Updated upstream
+=======
+
+    editItem(item) {
+      this.editedIndex = this.tables.indexOf(item);
+      this.editedItem = Object.assign({}, item);
+      this.dialog = true;
+    },
+
+    close() {
+      this.dialog = false;
+      this.$nextTick(() => {
+        this.editedItem = Object.assign({}, this.defaultItem);
+        this.editedIndex = -1;
+      });
+    },
+
+    closeDelete() {
+      this.dialogDelete = false;
+      this.$nextTick(() => {
+        this.editedItem = Object.assign({}, this.defaultItem);
+        this.editedIndex = -1;
+      });
+    },
+
+    save() {
+      if (this.editedIndex > -1) {
+        Object.assign(this.tables[this.editedIndex], this.editedItem);
+      } else {
+        this.tables.push(this.editedItem);
+      }
+      this.close();
+    },
+
+    async select(cardId) {
+      this.$setLoader();
+      this.$router.push({ path: `/orders/${cardId}` });
+      this.$disableLoader();
+    },
+>>>>>>> Stashed changes
   },
 };
 </script>
@@ -307,7 +495,7 @@ export default {
 .cardtitle {
   font-size: 15px;
   font-weight: bolder;
-  color: #000000 !important;
+  color: #ffffff !important;
   text-decoration: none;
   text-align: center;
 }

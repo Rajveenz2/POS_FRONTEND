@@ -42,6 +42,30 @@ export default [
   },
 
   {
+<<<<<<< Updated upstream
+=======
+    path: "/orders/:cardId",
+    meta: { layout: "default", noScroll: true, renderNavBar: true },
+    name: "orders",
+    component: () => import("@/pages/order.vue"),
+  },
+
+  {
+    path: "/createOrder",
+    meta: { layout: "default", noScroll: true, renderNavBar: true },
+    name: "createOrder",
+    component: () => import("@/pages/createOrder.vue"),
+  },
+
+  {
+    path: "/viewOrders",
+    meta: { layout: "default", noScroll: true, renderNavBar: true },
+    name: "viewOrders",
+    component: () => import("@/pages/viewOrders.vue"),
+  },
+
+  {
+>>>>>>> Stashed changes
     path: "/staff",
     meta: { layout: "default", noScroll: true, renderNavBar: true },
     name: "staff",

@@ -141,7 +141,7 @@ export default {
 
 <style scoped lang="css">
 .container {
-  margin-top: 5%;
+  margin-top: 1%;
   max-width: none !important;
 }
 

@@ -144,7 +144,18 @@ export default {
           this.$store.state.user = res.data.user;
           this.$store.state.code = this.password;
           window.$cookies.set("posToken", res.data.token);
-          this.$router.push({ path: `/home` });
+          let role = res.data.user.roles;
+          let superAdmin = role.find((element) => element == "ADMIN" || element == "CASHIER");
+          if (superAdmin == "ADMIN") {
+            console.log("admin")
+            this.$router.push({ path: `/home` });
+          } else if (superAdmin == "CASHIER") {
+            console.log("cashier")
+            this.$router.push({ path: `/createOrder` });
+          } else {
+            console.log("bot")
+            this.$router.push({ path: `/viewOrders` });
+          }
         });
         this.$disableLoader();
       } catch (error) {
@@ -222,7 +233,9 @@ export default {
 .text {
   color: #ffffff !important;
 }
-.theme--light.v-input input, .theme--light.v-input textarea, .text {
+.theme--light.v-input input,
+.theme--light.v-input textarea,
+.text {
   color: #ffffff !important;
 }
 .v-btn > .v-btn__content .v-icon {
