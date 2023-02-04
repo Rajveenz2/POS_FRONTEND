@@ -229,7 +229,12 @@ export default {
 
         this.$disableLoader();
       } catch (error) {
-        alert(error.response.data.message)
+        alert(error.response.data.message);
+        if (this.$store.state.user.roles[0] == "VIEWER") {
+          this.$router.push({ path: `/viewOrders` });
+        } else {
+          this.$router.push({ path: `/createOrder` });
+        }
       }
     },
 

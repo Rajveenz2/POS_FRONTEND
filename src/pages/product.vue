@@ -96,6 +96,7 @@
                 ></v-autocomplete>
                 <v-card-title class="producttitle">Product Name</v-card-title>
                 <v-text-field
+                  class="carddesc"
                   prepend-icon="mdi-food-variant"
                   color="#0075a7"
                   v-model="product.productName"
@@ -108,6 +109,7 @@
                   >Product Price (RM)</v-card-title
                 >
                 <v-text-field
+                  class="carddesc"
                   prepend-icon="mdi-currency-usd"
                   color="#0075a7"
                   v-model="product.productPrice"
@@ -120,6 +122,7 @@
                   >Product Description (Optional)</v-card-title
                 >
                 <v-text-field
+                  class="carddesc"
                   prepend-icon="mdi-food-kosher"
                   color="#0075a7"
                   v-model="product.productDesc"
@@ -204,7 +207,7 @@ export default {
 
     uploadFileToCloudinary(file) {
       this.preview = null;
-      return new Promise(function (resolve, reject) {
+      return new Promise(function(resolve, reject) {
         let formData = new FormData();
         formData.append(
           "upload_preset",
@@ -349,7 +352,7 @@ export default {
 }
 
 .carddesc {
-  font-size: 14px;
+  font-size: 18px;
   text-decoration: none;
   text-align: center;
   color: #05a0bf !important;
