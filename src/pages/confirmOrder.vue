@@ -62,6 +62,7 @@
             >Please select a table number :</v-card-title
           >
           <v-autocomplete
+            sortOrder="sortOrder"
             background-color="#fff"
             :items="tables"
             v-model="table"
@@ -98,6 +99,7 @@ export default {
       total: 0,
       orderId: [],
       orderType: "Dine-in",
+      sortOrder: "Ascending",
     };
   },
   computed: {},
@@ -141,7 +143,8 @@ export default {
         _id: this.orderId,
       };
       await dataService.confirmOrder(data).then((res) => {
-        console.log(res)
+        alert(res.data.message);
+        this.$router.push({ path: `/createOrder` });
         this.$disableLoader();
       });
     },

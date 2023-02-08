@@ -218,60 +218,36 @@
                   </v-stepper-content>
 
                   <v-stepper-content step="6">
-                    <v-card class="grid">
+                    <v-card class="grid" color="transparent">
                       <v-card-title class="producttitle"
                         >Confirm the details of your product below and click
                         continue to save</v-card-title
                       >
-                      <v-text-field
-                        prepend-icon="mdi-vector-selection"
-                        color="#0075a7"
-                        v-model="newProduct.productCategory"
-                        readonly
-                        outlined
+                      <v-card-title class="header1"
+                        >Category :
+                        {{ newProduct.productCategory }}</v-card-title
                       >
-                      </v-text-field>
-                      <v-text-field
-                        prepend-icon="mdi-food-variant"
-                        color="#0075a7"
-                        v-model="newProduct.productName"
-                        readonly
-                        dense
-                        outlined
-                        solo
+                      <v-card-title class="header1"
+                        >Name : {{ newProduct.productName }}</v-card-title
                       >
-                      </v-text-field>
-                      <v-text-field
-                        prepend-icon="mdi-currency-usd"
-                        color="#0075a7"
-                        v-model="newProduct.productPrice"
-                        readonly
-                        outlined
+                      <v-card-title class="header1"
+                        >Price (RM) :
+                        {{ newProduct.productPrice }}</v-card-title
                       >
-                      </v-text-field>
-                      <v-text-field
-                        prepend-icon="mdi-image-outline"
-                        color="#0075a7"
-                        v-model="newProduct.productImageUrl"
-                        readonly
-                        outlined
+                      <v-card-title class="header1"
+                        >Image URL :
+                        {{ newProduct.productImageUrl }}</v-card-title
                       >
-                      </v-text-field>
-                      <v-text-field
-                        prepend-icon="mdi-food-kosher"
-                        color="#0075a7"
-                        v-model="newProduct.productDesc"
-                        readonly
-                        outlined
-                        solo
+                      <v-card-title class="header1"
+                        >Description :
+                        {{ newProduct.productDesc }}</v-card-title
                       >
-                      </v-text-field
-                    ></v-card>
+                    </v-card>
                     <v-row class="justify-center align-center" no-gutters>
                       <v-btn color="#05a0bf" @click="addProduct()">
                         Continue
                       </v-btn>
-                      <v-btn text @click="addProducts = false">
+                      <v-btn text @click="cancelAddProduct()">
                         Cancel
                       </v-btn></v-row
                     >
@@ -287,7 +263,7 @@
             width="350px"
             :class="{ 'on-hover': hover }"
             :elevation="hover ? 12 : 16"
-            @click="addProducts = true"
+            @click="showAddProducts()"
             color="#F5F7FA"
             ><v-card class="grid">
               <v-img
@@ -405,10 +381,9 @@ export default {
       e1: 1,
       valid: true,
       preview: [],
-      url:
-        "http://res.cloudinary.com/de3gn7o77/image/upload/v1675119701/v5u4sg7q6h5abcamqing.png",
+      url: "http://res.cloudinary.com/de3gn7o77/image/upload/v1675119701/v5u4sg7q6h5abcamqing.png",
       name: "Click Here to Add a New Product",
-      categories: ["Food", "Beverage"],
+      categories: ["Fried", "Beverage", "Roti", "Thosai", "Rojak"],
       rules: {
         required: (value) => !!value || "Required.",
       },
@@ -453,7 +428,7 @@ export default {
     uploadFileToCloudinary(file) {
       this.preview = null;
       console.log(file);
-      return new Promise(function(resolve, reject) {
+      return new Promise(function (resolve, reject) {
         let formData = new FormData();
         formData.append(
           "upload_preset",
@@ -507,6 +482,15 @@ export default {
       });
       this.$router.go(0);
       this.$disableLoader();
+    },
+
+    showAddProducts() {
+      this.e1 = 1;
+      this.addProducts = true;
+    },
+
+    cancelAddProduct() {
+      this.addProducts = false;
     },
   },
 };
@@ -588,6 +572,15 @@ export default {
   color: #05a0bf !important;
 }
 
+.header1 {
+  margin-right: auto !important;
+  margin-left: auto !important;
+  font-size: 22px;
+  justify-content: center !important;
+  align-items: center !important;
+  color: rgb(0, 0, 0) !important;
+  flex-wrap: inherit !important;
+}
 .carddesc2 {
   font-size: 14px;
   text-decoration: none;

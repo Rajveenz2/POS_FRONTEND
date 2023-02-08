@@ -158,7 +158,7 @@ export default {
       e1: 1,
       valid: true,
       preview: null,
-      categories: ["Food", "Beverage"],
+      categories: ["Fried", "Beverage", "Roti", "Thosai" , "Rojak"],
       showUpload: false,
     };
   },

@@ -70,7 +70,7 @@
               ></v-row
             >
           </v-app-bar>
-          <div v-if="showFood">
+          <div v-if="showFried">
             <v-card
               v-for="product in products"
               :key="product._id"
@@ -78,7 +78,7 @@
               :class="{ 'on-hover': hover }"
               :elevation="hover ? 12 : 16"
               color="#F5F7FA"
-              ><div v-if="product.productCategory == 'Food'">
+              ><div v-if="product.productCategory == 'Fried'">
                 <v-card-title class="header1">{{
                   product.productName
                 }}</v-card-title>
@@ -168,7 +168,7 @@
               </div></v-card
             >
           </div>
-          <div v-if="showAsian">
+          <div v-if="showThosai">
             <v-card
               v-for="product in products"
               :key="product._id"
@@ -176,7 +176,105 @@
               :class="{ 'on-hover': hover }"
               :elevation="hover ? 12 : 16"
               color="#F5F7FA"
-              ><div v-if="product.productCategory == 'Asian'">
+              ><div v-if="product.productCategory == 'Thosai'">
+                <v-card-title class="header1">{{
+                  product.productName
+                }}</v-card-title>
+                <v-card
+                  class="grid4"
+                  width="160px"
+                  height="160px"
+                  :class="{ 'on-hover': hover }"
+                  :elevation="hover ? 12 : 16"
+                >
+                  <v-img
+                    :src="product.productImageUrl"
+                    height="150px"
+                    width="150px"
+                  >
+                  </v-img
+                ></v-card>
+                <v-row no-gutters class="justify-center align-center"
+                  ><v-col :cols="5"
+                    ><v-card-title class="header2"
+                      >RM {{ product.productPrice }}</v-card-title
+                    ></v-col
+                  ><v-col :cols="5"
+                    ><v-card-title class="header2"
+                      ><v-icon
+                        color="#4b0be1"
+                        @click="removeFromCart(product._id)"
+                        >mdi-minus-circle</v-icon
+                      ><v-card-title class="header3">{{
+                        product.quantity
+                      }}</v-card-title
+                      ><v-icon color="#4b0be1" @click="addToCart(product._id)"
+                        >mdi-plus-circle</v-icon
+                      ></v-card-title
+                    ></v-col
+                  ></v-row
+                >
+              </div></v-card
+            >
+          </div>
+          <div v-if="showRoti">
+            <v-card
+              v-for="product in products"
+              :key="product._id"
+              class="grid3"
+              :class="{ 'on-hover': hover }"
+              :elevation="hover ? 12 : 16"
+              color="#F5F7FA"
+              ><div v-if="product.productCategory == 'Roti'">
+                <v-card-title class="header1">{{
+                  product.productName
+                }}</v-card-title>
+                <v-card
+                  class="grid4"
+                  width="160px"
+                  height="160px"
+                  :class="{ 'on-hover': hover }"
+                  :elevation="hover ? 12 : 16"
+                >
+                  <v-img
+                    :src="product.productImageUrl"
+                    height="150px"
+                    width="150px"
+                  >
+                  </v-img
+                ></v-card>
+                <v-row no-gutters class="justify-center align-center"
+                  ><v-col :cols="5"
+                    ><v-card-title class="header2"
+                      >RM {{ product.productPrice }}</v-card-title
+                    ></v-col
+                  ><v-col :cols="5"
+                    ><v-card-title class="header2"
+                      ><v-icon
+                        color="#4b0be1"
+                        @click="removeFromCart(product._id)"
+                        >mdi-minus-circle</v-icon
+                      ><v-card-title class="header3">{{
+                        product.quantity
+                      }}</v-card-title
+                      ><v-icon color="#4b0be1" @click="addToCart(product._id)"
+                        >mdi-plus-circle</v-icon
+                      ></v-card-title
+                    ></v-col
+                  ></v-row
+                >
+              </div></v-card
+            >
+          </div>
+          <div v-if="showRojak">
+            <v-card
+              v-for="product in products"
+              :key="product._id"
+              class="grid3"
+              :class="{ 'on-hover': hover }"
+              :elevation="hover ? 12 : 16"
+              color="#F5F7FA"
+              ><div v-if="product.productCategory == 'Rojak'">
                 <v-card-title class="header1">{{
                   product.productName
                 }}</v-card-title>
@@ -237,8 +335,10 @@ export default {
       category: [],
       categories: [],
       showBeverages: false,
-      showFood: true,
-      showAsian: false,
+      showFried: true,
+      showRoti: false,
+      showThosai: false,
+      showRojak: false,
       quantity: 1,
       order: [],
       total: 0,
@@ -279,20 +379,43 @@ export default {
 
     loadProduct(categori) {
       console.log(categori);
-      if (categori == "Food") {
-        this.showFood = true;
+      if (categori == "Fried") {
+        this.showFried = true;
         this.showBeverages = false;
-        this.showAsian = false;
+        this.showThosai = false;
+        this.showRojak = false;
+        this.showRoti = false;
       }
       if (categori == "Beverage") {
-        this.showFood = false;
+        this.showFried = false;
         this.showBeverages = true;
-        this.showAsian = false;
+        this.showThosai = false;
+        this.showRojak = false;
+        this.showRoti = false;
       }
-      if (categori == "Asian") {
-        this.showFood = false;
+      if (categori == "Thosai") {
+        console.log(categori);
+        this.showFried = false;
         this.showBeverages = false;
-        this.showAsian = true;
+        this.showThosai = true;
+        this.showRojak = false;
+        this.showRoti = false;
+      }
+      if (categori == "Roti") {
+        console.log(categori);
+        this.showFried = false;
+        this.showBeverages = false;
+        this.showThosai = false;
+        this.showRojak = false;
+        this.showRoti = true;
+      }
+      if (categori == "Rojak") {
+        console.log(categori);
+        this.showFried = false;
+        this.showBeverages = false;
+        this.showThosai = false;
+        this.showRojak = true;
+        this.showRoti = false;
       }
     },
 

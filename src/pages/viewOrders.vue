@@ -20,7 +20,7 @@
       >
       </vue-particles>
       <v-hover v-slot="{ hover }" open-delay="200">
-        <v-card class="grid" width="80%" shaped color="transparent">
+        <v-card class="grid" shaped color="transparent">
           <v-card
             class="grid"
             shaped
@@ -43,11 +43,22 @@
                 <v-card-title class="header2">{{
                   o.productName
                 }}</v-card-title></v-col
-              ><v-col :cols="6"> </v-col></v-row
-            ><v-row class="justify-center align-center" no-gutters
               ><v-col :cols="6"> </v-col
-            ></v-row> </v-card></v-card
-      ></v-hover>
+            ></v-row>
+          </v-card>
+          <v-card
+            v-if="showNoOrder"
+            class="grid"
+            shaped
+            color="transparent"
+            width="100%"
+            :class="{ 'on-hover': hover }"
+            :elevation="hover ? 12 : 16"
+          >
+            <v-card-title class="header1">No order found</v-card-title></v-card
+          ></v-card
+        ></v-hover
+      >
     </v-container>
   </v-app>
 </template>
@@ -60,23 +71,38 @@ export default {
   data() {
     return {
       orders: [],
+      showNoOrder: false,
     };
   },
   computed: {},
 
-  mounted() {
+  created() {
     this.getactiveOrders();
-    this.timer = setInterval(this.getactiveOrders, 8000);
+    this.timer = setInterval(this.getactiveOrders, 15000);
   },
 
   methods: {
     async getactiveOrders() {
       this.$setLoader();
       await dataService.getactiveOrders().then((res) => {
-        this.orders = res.data.order;
+        if (res.data.order != 0) {
+          this.orders = res.data.order;
+          this.showNoOrder = false;
+          this.$disableLoader();
+        } else {
+          this.orders = [];
+          this.showNoOrder = true;
+          this.$disableLoader();
+        }
       });
+    },
 
-      this.$disableLoader();
+    cancelAutoUpdate() {
+      clearInterval(this.timer);
+    },
+
+    beforeUnmount() {
+      this.cancelAutoUpdate();
     },
   },
 };
