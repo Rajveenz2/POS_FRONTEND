@@ -30,7 +30,7 @@ router.beforeEach((to, from, next) => {
     next()
   } else {
     if (window.$cookies.get('posToken') == null) {
-      next({ name: '/' })
+      next({ name: 'login' })
     } else {
 
       // Extend session for another hour

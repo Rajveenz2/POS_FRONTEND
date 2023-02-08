@@ -19,47 +19,70 @@
         clickMode="push"
       >
       </vue-particles>
-      <v-card
-        class="grid"
-        width="80%"
-        shaped
-        color="transparent"
-        v-if="table.tableStatus == 'Active'"
-        ><v-card class="grid4"
-          ><v-card-text class="producttitle1">
-            Current Order for Table :
-            <v-card-text class="producttitle2">{{
-              table.tableNumber
-            }}</v-card-text>
-          </v-card-text></v-card
-        ><v-card class="grid4"
-          ><v-card-text class="producttitle"
-            >Order Status : {{ order.orderStatus }}</v-card-text
-          ><v-card-text class="producttitle"
-            >Order ID : {{ order._id }}</v-card-text
-          ></v-card
-        ><v-card class="grid4" v-for="o in order.order" :key="o._id"
-          ><v-card-text class="producttitle2">Name : {{ o.productName }}</v-card-text
-          ><v-card-text class="producttitle2"
-            >Quantity : {{ o.quantity }}</v-card-text
-          ><v-card-text class="producttitle2"
-            >Total Amount : RM {{ o.currentPrice }}</v-card-text
-          ></v-card
-        ><v-card class="grid4"
-          ><v-card-text class="producttitle1"
-            >Order Total : RM {{ total }}</v-card-text
-          ></v-card
-        ></v-card
-      >
-      <v-card class="grid" width="80%" shaped color="transparent" v-else
-        ><v-card class="grid4" height="300px" shaped>
-          <v-card-title class="producttitle">
-            No order found. Please find an active table to view orders
-          </v-card-title></v-card
-        ></v-card
-      ></v-container
-    ></v-app
-  >
+      <v-hover v-slot="{ hover }" open-delay="200">
+        <v-card
+          class="grid"
+          shaped
+          color="transparent"
+          width="80%"
+          :class="{ 'on-hover': hover }"
+          :elevation="hover ? 12 : 16"
+          ><v-card
+            class="grid"
+            shaped
+            color="transparent"
+            width="80%"
+            :class="{ 'on-hover': hover }"
+            :elevation="hover ? 12 : 16"
+            v-for="o in order"
+            :key="o._id"
+            ><v-row class="justify-center align-center" no-gutters
+              ><v-col :cols="6">
+                <v-card-title class="header1"
+                  ><v-icon
+                    >mdi-numeric-{{ o.quantity }}-circle-outline
+                    mdi-36px</v-icon
+                  ></v-card-title
+                ></v-col
+              ><v-col :cols="6">
+                <v-card-title class="header2">{{
+                  o.productName
+                }}</v-card-title></v-col
+              ></v-row
+            >
+          </v-card>
+          <v-card-title class="header2"
+            >Please select a dining option :</v-card-title
+          >
+          <v-radio-group v-model="orderType" row>
+            <v-radio label="Dine-in" value="Dine-in"></v-radio>
+            <v-radio label="Takeaway" value="Takeaway"></v-radio>
+          </v-radio-group>
+          <v-card-title class="header2"
+            >Please select a table number :</v-card-title
+          >
+          <v-autocomplete
+            background-color="#fff"
+            :items="tables"
+            v-model="table"
+            auto-select-first
+            item-text="tableNumber"
+            item-value="_id"
+            required
+            solo
+          ></v-autocomplete
+          ><v-spacer></v-spacer>
+          <v-card-title class="header2">Total : RM {{ total }}</v-card-title>
+          <v-btn
+            class="btn"
+            :disabled="table.length < 1"
+            @click="confirmOrder()"
+            >Confirm</v-btn
+          >
+        </v-card>
+      </v-hover>
+    </v-container>
+  </v-app>
 </template>
 
 <script>
@@ -69,45 +92,58 @@ const dataService = new DataService();
 export default {
   data() {
     return {
-      order: [],
+      tables: [],
       table: [],
-      total: 0
+      order: [],
+      total: 0,
+      orderId: [],
+      orderType: "Dine-in",
     };
   },
   computed: {},
 
   mounted() {
-    this.getTableStatus();
+    this.findOrder();
+    this.getInactiveTables();
   },
 
   methods: {
-    async getTableStatus() {
+    async findOrder() {
       this.$setLoader();
       await dataService
-        .getTable({ _id: this.$route.params.cardId })
+        .findOrder({ _id: this.$route.params.cardId })
         .then((res) => {
-          this.table = res.data.table[0];
-          if (this.table.tableStatus == "Active") {
-            this.findOrder();
-          }
+          this.order = res.data.order[0].order;
+          this.total = res.data.order[0].total;
+          this.orderId = res.data.order[0]._id;
         });
 
       this.$disableLoader();
     },
 
-    async findOrder() {
+    async getInactiveTables() {
       this.$setLoader();
-      await dataService
-        .getOrder({ _id: this.$route.params.cardId })
-        .then((res) => {
-          if (res.data.order[0]) {
-            this.order = res.data.order[0];
-            this.total = res.data.order[0].total
-          } else {
-            alert("No order found");
-          }
-        });
+      await dataService.getInactiveTables().then((res) => {
+        this.tables = res.data.table;
+        this.table = this.tables[0];
+      });
+
       this.$disableLoader();
+    },
+
+    async confirmOrder() {
+      this.$setLoader();
+      let data = {
+        order: this.order,
+        total: this.total,
+        table: this.table,
+        orderType: this.orderType,
+        _id: this.orderId,
+      };
+      await dataService.confirmOrder(data).then((res) => {
+        console.log(res)
+        this.$disableLoader();
+      });
     },
   },
 };
@@ -137,7 +173,7 @@ export default {
   margin-left: auto !important;
   place-items: center;
   background-color: transparent;
-  /* display: grid !important; */
+  display: grid !important;
   /* background-image: linear-gradient(to right, #FFCF9F, #FF889C); */
 }
 .grid2 {
@@ -160,10 +196,8 @@ export default {
 .grid4 {
   margin-top: 1% !important;
   margin-bottom: 1% !important;
-  margin-right: auto !important;
-  margin-left: auto !important;
+  margin-left: 1% !important;
   place-items: center;
-  display: grid;
 }
 
 #particles-js {
@@ -231,6 +265,39 @@ export default {
   align-items: center;
 }
 
+.header1 {
+  font-size: 18px;
+  justify-content: center !important;
+  align-items: center !important;
+  color: #0ff !important;
+  flex-wrap: inherit !important;
+}
+
+.header2 {
+  margin-right: auto !important;
+  margin-left: auto !important;
+  font-size: 18px;
+  justify-content: center;
+  align-items: center;
+  color: #fff !important;
+  flex-wrap: inherit !important;
+}
+
+.header3 {
+  font-size: 18px;
+  justify-content: center;
+  align-items: center;
+  color: #001736 !important;
+}
+
+.header4 {
+  margin-left: 1%;
+  font-size: 18px;
+  justify-content: center;
+  align-items: center;
+  color: #00fff3 !important;
+  flex-wrap: inherit !important;
+}
 .producttitle2 {
   font-size: 15px;
   text-decoration: none;

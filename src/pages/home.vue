@@ -62,7 +62,8 @@
                 @click="tables"
                 ><v-card-title class="text1">Tables Occupied</v-card-title>
                 <v-card-title class="header"
-                  >{{ tablesLength.active }} out of {{ tablesLength.tables }}</v-card-title
+                  >{{ tablesLength.active }} out of
+                  {{ tablesLength.tables }}</v-card-title
                 ></v-card
               ></v-col
             >
@@ -75,6 +76,11 @@
                 ><v-card-title class="text1">Total Workers</v-card-title>
                 <v-card-title class="header">5</v-card-title></v-card
               ></v-col
+            >
+          </v-row>
+          <v-row no-gutters class="justify-center align-center">
+            <v-btn width="300px" height="100px" class="btn3" color="#05a0bf" @click="$router.push({ path: `/createOrder` })"
+              ><v-card-title class="header1">Add Order</v-card-title></v-btn
             >
           </v-row>
         </v-card>
@@ -94,7 +100,7 @@ export default {
       tablesLength: [],
     };
   },
-  mounted: function () {
+  mounted: function() {
     this.getProductsLength();
     this.getTablesLength();
   },
@@ -143,6 +149,11 @@ export default {
 .container {
   margin-top: 1%;
   max-width: none !important;
+}
+
+.btn3 {
+  margin-top: 2% !important;
+  margin-bottom: 2% !important;
 }
 
 #particles-js {
@@ -199,6 +210,15 @@ export default {
   justify-content: center;
   align-items: center;
   color: #05a0bf !important;
+}
+
+.header1 {
+  margin-right: auto !important;
+  margin-left: auto !important;
+  font-size: 20px;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff !important;
 }
 .v-application .elevation-16 {
   box-shadow: 0px 8px 10px -5px #05a0bf,

@@ -96,6 +96,14 @@ export default class RestResource {
     );
   }
 
+  async getInactiveTables(params) {
+    return await axios.post(
+      `${BACKEND_URL}/table/getInactiveTables`,
+      params,
+      Util.setupHeaders()
+    );
+  }
+
   async getTableslength(params) {
     return await axios.post(
       `${BACKEND_URL}/table/getTableslength`,
@@ -115,6 +123,38 @@ export default class RestResource {
   async getOrder(params) {
     return await axios.post(
       `${BACKEND_URL}/order/getOrder`,
+      params,
+      Util.setupHeaders()
+    );
+  }
+
+  async addOrder(params) {
+    return await axios.post(
+      `${BACKEND_URL}/order/addOrder`,
+      params,
+      Util.setupHeaders()
+    );
+  }
+
+  async findOrder(params) {
+    return await axios.post(
+      `${BACKEND_URL}/order/findOrder`,
+      params,
+      Util.setupHeaders()
+    );
+  }
+
+  async confirmOrder(params) {
+    return await axios.post(
+      `${BACKEND_URL}/order/confirmOrder`,
+      params,
+      Util.setupHeaders()
+    );
+  }
+
+  async getactiveOrders(params) {
+    return await axios.post(
+      `${BACKEND_URL}/order/getactiveOrders`,
       params,
       Util.setupHeaders()
     );

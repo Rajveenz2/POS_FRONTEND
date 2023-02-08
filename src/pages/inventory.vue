@@ -342,7 +342,7 @@
                     </div>
                   </td>
                   <td>
-                    <v-icon @click="deleteProduct(item._id)">
+                    <v-icon color="#4b0be1" @click="deleteProduct(item._id)">
                       mdi-delete
                     </v-icon>
                   </td>

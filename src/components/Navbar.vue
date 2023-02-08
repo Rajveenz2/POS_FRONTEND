@@ -18,7 +18,7 @@
     >
 
     <v-btn icon @click="logout()">
-      <v-icon color="#0075a7">mdi-logout-variant</v-icon>
+      <v-icon class="icn1">mdi-logout-variant</v-icon>
     </v-btn>
   </v-app-bar>
 </template>

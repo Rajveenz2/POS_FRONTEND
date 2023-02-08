@@ -56,6 +56,13 @@ export default [
   },
 
   {
+    path: "/confirmOrder/:cardId",
+    meta: { layout: "default", noScroll: true, renderNavBar: true },
+    name: "confirmOrder",
+    component: () => import("@/pages/confirmOrder.vue"),
+  },
+
+  {
     path: "/viewOrders",
     meta: { layout: "default", noScroll: true, renderNavBar: true },
     name: "viewOrders",
